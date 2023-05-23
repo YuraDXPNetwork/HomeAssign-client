@@ -12,7 +12,7 @@ function App() {
     <CircularProgress />
   ) : (
     <>
-      <Container maxWidth="lg">
+      <Container maxWidth="sm">
         <Main />
       </Container>
     </>
