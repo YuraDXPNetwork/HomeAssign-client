@@ -1,7 +1,10 @@
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setShowTypesPopUp } from "../../reducers/general";
 
 export default function Bar() {
+  const dispatch = useDispatch();
   return (
     <Box
       sx={{
@@ -11,6 +14,12 @@ export default function Bar() {
       }}
     >
       <Button variant="contained">Prev</Button>
+      <Button
+        onClick={() => dispatch(setShowTypesPopUp(true))}
+        variant="contained"
+      >
+        Select Type
+      </Button>
       <Button variant="contained">Next</Button>
     </Box>
   );

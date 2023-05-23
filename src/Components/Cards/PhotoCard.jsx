@@ -2,12 +2,30 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setImageIndex, setShowPopUp } from "../../reducers/general";
 
-export default function PhotoCard({ data }) {
+export default function PhotoCard({ data, index }) {
   const { largeImageURL } = data;
-  console.log("🚀 ~ file: PhotoCard.jsx:11 ~ PhotoCard ~ previewURL:", data);
+
+  const dispatch = useDispatch();
+  const indexOfImageInPopUp = useSelector(
+    state => state.general.indexOfImageInPopUp
+  );
+
+  const handleClick = () => {
+    // We need to check first if this card is already selected
+    // Because if it is, the isEffect in PopUp component will not fire
+    // If indexes are equal, we just need to set pupUp to true
+    if (index === indexOfImageInPopUp) dispatch(setShowPopUp(true));
+    dispatch(setImageIndex(index));
+  };
+
   return (
-    <Card sx={{ maxWidth: 200, margin: "auto", padding: "none" }}>
+    <Card
+      onClick={handleClick}
+      sx={{ maxWidth: 200, margin: "auto", padding: "none" }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -21,5 +39,6 @@ export default function PhotoCard({ data }) {
 }
 
 PhotoCard.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
+  index: PropTypes.number,
 };

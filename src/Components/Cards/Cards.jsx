@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 export default function Cards({ photos }) {
   return (
     <Grid container alignItems="center" justifyContent="center" spacing={1}>
-      {photos?.hits.map(e => (
+      {photos?.map((e, index) => (
         <Grid key={e.id} item xs={12} sm={6} md={4}>
-          <PhotoCard key={e.id} data={e} />
+          <PhotoCard index={index} key={e.id} data={e} />
         </Grid>
       ))}
     </Grid>

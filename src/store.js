@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { photosApi } from "./service/service";
+import general from "./reducers/general";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
+    general,
     [photosApi.reducerPath]: photosApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
