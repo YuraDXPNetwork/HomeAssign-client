@@ -14,11 +14,14 @@ export default function PhotoCard({ data, index }) {
   );
 
   const handleClick = () => {
-    // We need to check first if this card is already selected
-    // Because if it is, the isEffect in PopUp component will not fire
-    // If indexes are equal, we just need to set pupUp to true
-    if (index === indexOfImageInPopUp) dispatch(setShowPopUp(true));
-    dispatch(setImageIndex(index));
+    // Check if this card is already selected
+    if (index === indexOfImageInPopUp) {
+      // If already selected, show the PopUp
+      dispatch(setShowPopUp(true));
+    } else {
+      // If not selected, update the image index
+      dispatch(setImageIndex(index));
+    }
   };
 
   return (

@@ -5,20 +5,29 @@ import { useEffect } from "react";
 import { setShowPopUp } from "../../reducers/general";
 
 export default function PopUp({ photos }) {
-  const index = useSelector(state => state.general.indexOfImageInPopUp);
-  const show = useSelector(state => state.general.popUp);
+  // Retrieve the index of the selected image in the pop-up from the Redux store
+  const indexOfImageInPopUp = useSelector(
+    state => state.general.indexOfImageInPopUp
+  );
+
+  // Retrieve the visibility of the pop-up from the Redux store
+  const showPopUp = useSelector(state => state.general.popUp);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //Here we listen to index updates from PhotoCard component
-    if (index != null) dispatch(setShowPopUp(true));
-    return () => {};
-  }, [index]);
+    // Listen to updates in indexOfImageInPopUp and show the pop-up when an image is selected
+    if (indexOfImageInPopUp !== null) {
+      dispatch(setShowPopUp(true));
+    }
+    return () => {
+      // Add any necessary cleanup logic here
+    };
+  }, [indexOfImageInPopUp, dispatch]);
 
   return (
     <Modal
-      open={show}
+      open={showPopUp}
       onClose={() => dispatch(setShowPopUp(false))}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -40,13 +49,16 @@ export default function PopUp({ photos }) {
         }}
       >
         <Paper sx={{ overflow: "scroll" }} elevation={3}>
-          {photos && index !== null
-            ? Object.entries(photos[index]).map(e => (
-                <Typography key={e.id} p color="initial">
-                  <span>{`${e[0]}: `}</span>
-                  <span>{e[1]}</span>
-                </Typography>
-              ))
+          {photos && indexOfImageInPopUp !== null
+            ? // Render the details of the selected image
+              Object.entries(photos[indexOfImageInPopUp]).map(
+                ([key, value], index) => (
+                  <Typography key={index} p color="initial">
+                    <span>{`${key}: `}</span>
+                    <span>{value}</span>
+                  </Typography>
+                )
+              )
             : ""}
         </Paper>
       </Box>

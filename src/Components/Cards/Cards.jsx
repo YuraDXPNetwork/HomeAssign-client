@@ -5,14 +5,16 @@ import PropTypes from "prop-types";
 export default function Cards({ photos }) {
   return (
     <Grid container alignItems="center" justifyContent="center" spacing={1}>
-      {photos?.map((e, index) => (
-        <Grid key={e.id} item xs={12} sm={6} md={4}>
-          <PhotoCard index={index} key={e.id} data={e} />
+      {/* Render PhotoCard component for each photo */}
+      {photos?.map((photo, index) => (
+        <Grid key={photo.id} item xs={12} sm={6} md={4}>
+          <PhotoCard index={index} data={photo} />
         </Grid>
       ))}
     </Grid>
   );
 }
+
 Cards.propTypes = {
   photos: PropTypes.array,
 };

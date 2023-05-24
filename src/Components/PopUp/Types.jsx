@@ -6,7 +6,9 @@ import { setShowTypesPopUp, setType } from "../../reducers/general";
 
 export default function Types() {
   const dispatch = useDispatch();
-  const show = useSelector(state => state.general.typesPopUp);
+
+  // Retrieve the visibility of the types pop-up from the Redux store
+  const showTypesPopUp = useSelector(state => state.general.typesPopUp);
 
   const handleClick = type => {
     dispatch(setType(type));
@@ -15,7 +17,7 @@ export default function Types() {
 
   return (
     <Modal
-      open={show}
+      open={showTypesPopUp}
       onClose={() => dispatch(setShowTypesPopUp(false))}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -49,16 +51,17 @@ export default function Types() {
             orientation="vertical"
             aria-label="vertical outlined button group"
           >
-            {types.map((e, index) => (
+            {/* Render buttons for each type */}
+            {types.map((type, index) => (
               <Button
-                onClick={() => handleClick(e)}
+                onClick={() => handleClick(type)}
                 orientation="vertical"
                 key={index}
                 variant="contained"
                 color="primary"
                 aria-label="vertical contained button group"
               >
-                {e}
+                {type}
               </Button>
             ))}
           </ButtonGroup>
