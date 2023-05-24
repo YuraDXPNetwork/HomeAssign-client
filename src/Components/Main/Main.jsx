@@ -12,10 +12,8 @@ export default function Main() {
   // Retrieve the selected type from the Redux store
   const type = useSelector(state => state.general.type);
   const images = useSelector(state => state.general.images);
-  console.log("🚀 ~ file: Main.jsx:15 ~ Main ~ images:", images);
 
   // Fetch the photos based on the selected type
-  // const { data: photos } = useGetPhotosByCategoryQuery(type);
 
   const { data: photos } = useGetImagesByCategoryQuery(type);
 
