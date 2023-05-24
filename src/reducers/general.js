@@ -4,13 +4,21 @@ const initialState = {
 popUp:false,
 typesPopUp: false,
 indexOfImageInPopUp:null,
-type: "sports"
+type: "sports",
+currentPage: 1,
+images: []
 }
 
 const general = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    setImages(state, action){
+      state.images = action.payload
+    },
+    setCurrentPage(state, action){
+        state.currentPage = action.payload;
+    },
     setShowPopUp(state, action){
         state.popUp = action.payload;
     },
@@ -26,6 +34,13 @@ const general = createSlice({
   },
 });
 
-export const { setShowPopUp, setImageIndex, setType, setShowTypesPopUp } = general.actions;
+export const {
+  setImages,
+  setShowPopUp,
+  setImageIndex,
+  setType,
+  setShowTypesPopUp,
+  setCurrentPage,
+} = general.actions;
 
 export default general.reducer;

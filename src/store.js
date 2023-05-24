@@ -1,18 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { photosApi } from "./service/service";
+import { imagesApi } from "./service/service";
 import general from "./reducers/general";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     general,
-    [photosApi.reducerPath]: photosApi.reducer,
+    [imagesApi.reducerPath]: imagesApi.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(photosApi.middleware),
+    getDefaultMiddleware().concat(imagesApi.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

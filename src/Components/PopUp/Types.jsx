@@ -33,7 +33,6 @@ export default function Types() {
           "& > :not(style)": {
             m: 1,
             width: 200,
-            height: 200,
           },
         }}
       >
@@ -48,6 +47,7 @@ export default function Types() {
           }}
         >
           <ButtonGroup
+            sx={{ margin: "1rem" }}
             orientation="vertical"
             aria-label="vertical outlined button group"
           >

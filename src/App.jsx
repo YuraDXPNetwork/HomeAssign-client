@@ -1,12 +1,13 @@
 import "./App.css";
 import { Container } from "@mui/material";
 import Main from "./Components/Main/Main";
-import { useGetPhotosByCategoryQuery } from "./service/service";
+import { useGetImagesByCategoryQuery } from "./service/service";
 import { CircularProgress } from "@material-ui/core";
-import { SPORTS } from "./assets/consts";
+import { useSelector } from "react-redux";
 
 function App() {
-  const { data } = useGetPhotosByCategoryQuery(SPORTS);
+  const type = useSelector(state => state.general.type);
+  const { data } = useGetImagesByCategoryQuery(type);
 
   return !data ? (
     <CircularProgress />
